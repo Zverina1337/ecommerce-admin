@@ -4,15 +4,15 @@ import {Button} from "@/components/ui/button";
 import {Plus} from "lucide-react";
 import {Separator} from "@/components/ui/separator";
 import {useParams, useRouter} from "next/navigation";
-import {BillboardColumn, columns} from "@/app/(dashboard)/[storeId]/(routes)/billboards/components/columns";
 import {DataTable} from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
+import {CategoryColumn, columns} from "@/app/(dashboard)/[storeId]/(routes)/categories/components/columns";
 
-interface BillboardClientProps {
-    data: BillboardColumn[];
+interface CategoryClientProps {
+    data: CategoryColumn[];
 }
 
-const BillboardClient: React.FC<BillboardClientProps> = ({
+const CategoryClient: React.FC<CategoryClientProps> = ({
     data
 }) => {
     const router = useRouter()
@@ -27,11 +27,11 @@ const BillboardClient: React.FC<BillboardClientProps> = ({
                 "
             >
                 <Heading
-                    title={`Billboards (${data.length})`}
-                    description="Manage billboards for your store"
+                    title={`Categories (${data.length})`}
+                    description="Manage catrgories for your store"
                 />
                 <Button
-                    onClick={() => router.push(`/${params.storeId}/billboards/new`)}
+                    onClick={() => router.push(`/${params.storeId}/categories/new`)}
                 >
                     <Plus className="mr-4 h-4 w-4"/>
                     Add new
@@ -41,19 +41,19 @@ const BillboardClient: React.FC<BillboardClientProps> = ({
             <DataTable
                 columns={columns}
                 data={data}
-                searchKey="label"
+                searchKey="name"
             />
             <Heading
                 title="API"
-                description="API calls for Billboards"
+                description="API calls for Categories"
             />
             <Separator/>
             <ApiList
-                entityName="billboards"
-                entityIdName="billboardId"
+                entityName="categories"
+                entityIdName="categoryId"
             />
         </>
     );
 };
 
-export default BillboardClient;
+export default CategoryClient;
