@@ -8,10 +8,10 @@ import {useParams, useRouter} from "next/navigation";
 import requestManager from "@/fetcher";
 import {useState} from "react";
 import AlertModal from "@/components/modals/alert-modal";
-import {CategoryColumn} from "@/app/(dashboard)/[storeId]/(routes)/categories/components/columns";
+import {ColorColumn} from "@/app/(dashboard)/[storeId]/(routes)/colors/components/columns";
 
 interface CellActionProps {
-    data: CategoryColumn;
+    data: ColorColumn;
 }
 
 const CellAction: React.FC<CellActionProps> = ({
@@ -24,17 +24,17 @@ const CellAction: React.FC<CellActionProps> = ({
 
     const onCopy = () => {
         navigator.clipboard.writeText(data.id)
-        toast.success("Category ID copied to the clipboard")
+        toast.success("Color ID copied to the clipboard")
     }
 
     const onDelete = async () => {
         try {
             setLoading(true)
-            await requestManager(`/api/${params.storeId}/categories/${data.id}`, "DELETE")
+            await requestManager(`/api/${params.storeId}/colors/${data.id}`, "DELETE")
             router.refresh()
-            toast.success("Category deleted.")
+            toast.success("Color deleted.")
         } catch (error) {
-            toast.error("Make sure you removed all products using this category first.")
+            toast.error("Make sure you removed all products using this color first.")
         } finally {
             setLoading(false)
             setOpen(false)
@@ -71,7 +71,7 @@ const CellAction: React.FC<CellActionProps> = ({
                         <Copy className="mr-2 h-4 w-4" />
                         Copy ID
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/categories/${data.id}`)}>
+                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}>
                         <Edit className="mr-2 h-4 w-4" />
                         Update
                     </DropdownMenuItem>
