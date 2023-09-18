@@ -40,7 +40,7 @@ export const StoreModal = () => {
         try {
             setLoading(true);
             const response = await requestManager("/api/stores", "POST", values)
-
+            // @ts-ignore
             window.location.assign(`/${response.id}`)
         } catch (error) {
             toast.error("Something went wrong!")
